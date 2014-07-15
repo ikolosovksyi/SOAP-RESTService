@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Test page</title>
+	<script language="javascript" type="text/javascript" src="Scripts/jquery-2.1.1.js"></script>
+</head>
+<body>
+	Request results:
+	<table>
+		<tr>
+			<td>String request</td>
+			<td id="stringData"></td>
+		</tr>
+		<tr>
+			<td>Complex data request</td>
+			<td id="complexData"></td>
+		</tr>
+		<tr>
+			<td>Simple list</td>
+			<td id="simpleList"></td>
+		</tr>
+		<tr>
+			<td>Copmlex data list</td>
+			<td id="listOfComplexData"></td>
+		</tr>
+	</table>
+	<div id="errorPlaceholder"></div>
+
+	<script language="javascript" type="text/javascript">
+		$(document).ready(function () {
+			var onSuccess = function (stringData, complexData, simpleList, listOfComplexData) {
+				$('#stringData').html(stringData);
+				$('#complexData').html(JSON.stringify(complexData[0]));
+				$('#simpleList').html(JSON.stringify(simpleList[0]));
+				$('#listOfComplexData').html(JSON.stringify(listOfComplexData[0]));
+			};
+
+			var onFailure = function() {
+				$('#errorPlaceholder').html('Bad request');
+			}
+
+			$.when($.get('http://localhost:63198/TestService.svc/rest/GetStringData'),
+				$.get('http://localhost:63198/TestService.svc/rest/GetComplexData'),
+				$.get('http://localhost:63198/TestService.svc/rest/GetSimpleList'),
+				$.get('http://localhost:63198/TestService.svc/rest/GetListOfComplexData'))
+				.then(onSuccess, onFailure);
+		});
+	</script>
+</body>
+</html>
