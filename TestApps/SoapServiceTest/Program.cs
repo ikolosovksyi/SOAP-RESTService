@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using SoapServiceTest.TestServiceReference;
 
@@ -9,7 +8,6 @@ namespace SoapServiceTest
 	{
 		static void Main(string[] args)
 		{
-			
 			TestServiceClient client = new TestServiceClient();
 			string stringData = client.GetStringData();
 			string[] stringsList = client.GetSimpleList();
